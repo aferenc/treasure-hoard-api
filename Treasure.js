@@ -16,5 +16,5 @@ const treasureSchema = new mongoose.Schema({
     olimar_notes: String,
     sales_pitch: String
 });
-
-module.exports = mongoose.model("Treasure", treasureSchema);
+// Create the Treasure model based on the "us_treasures" collection in the DB
+module.exports = mongoose.model("Treasure", treasureSchema, "us_treasures");
