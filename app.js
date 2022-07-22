@@ -24,6 +24,17 @@ app.get("/treasures", (request, result) => {
     });
 });
 
+// GET a treasure by ID
+app.get("/treasures/:id", (request, result) =>{
+    Treasure.findById(request.params.id, (err, foundTreasure) => {
+        if(foundTreasure) {
+            result.send(foundTreasure);
+        } else {
+            result.send("No matching treasure found.")
+        }
+    });
+});
+
 app.listen(3000, function() {
     console.log("Server started on port 3000");
 })
