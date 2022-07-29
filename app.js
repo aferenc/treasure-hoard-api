@@ -15,26 +15,31 @@ mongoose.connect("mongodb://localhost:27017/treasure_hoard",
 
 // GET all treasures
 app.get("/treasures", (request, result) => {
-    Treasure.find((err, foundTreasures) => {
-        if(!err) {
+    Treasure.find()
+        .then( foundTreasures => {
             result.send(foundTreasures);
-        } else {
+        })
+        .catch( err => {
             result.send(err);
-        }
-    });
+        });
 });
 
 // GET a treasure by ID
-app.get("/treasures/:id", (request, result) =>{
-    Treasure.findById(request.params.id, (err, foundTreasure) => {
-        if(foundTreasure) {
-            result.send(foundTreasure);
-        } else {
-            result.send("No matching treasure found.")
-        }
-    });
+app.get("/treasures/:id", (request, result) => {
+    Treasure.findById(request.params.id)  
+        .then( foundTreasure => {
+            if(foundTreasure) {
+                result.send(foundTreasure);
+            }
+            else {
+                result.send("Please provide an ID between 1 and 201.");
+            }
+        })
+        .catch( err => {
+            result.send(err);
+        });
 });
 
-app.listen(3000, function() {
+app.listen(3000, () => {
     console.log("Server started on port 3000");
 })
