@@ -4,7 +4,7 @@
   "description": "A web API to serve data from Pikmin 2's Treasure Hoard",
   "main": "index.js",
   "scripts": {
-    "devStart": "SET NODE_ENV=dev && nodemon app.js",
+    "devStart": "NODE_ENV=dev && nodemon app.js",
     "test": "mocha --timeout 10000"
   },
   "repository": {
