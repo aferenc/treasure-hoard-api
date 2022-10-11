@@ -128,3 +128,6 @@ dist
 
 # macOS DS_Store
 .DS_Store
+
+# configuration directory containing sensitive database connection strings
+config/

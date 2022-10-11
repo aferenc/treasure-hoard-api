@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "devStart": "NODE_ENV=dev && nodemon app.js",
+    "start": "NODE_ENV=default && nodemon app.js",
     "test": "mocha --timeout 10000"
   },
   "repository": {
