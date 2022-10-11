@@ -1,17 +1,23 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const morgan = require('morgan');
+const config = require('config');
 const Treasure = require("./Treasure");
 
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
-mongoose.connect("mongodb://localhost:27017/treasure_hoard", 
+mongoose.connect(config.DB_Host, 
     () => { console.log("Connected to database") },
         e => console.error("Error connecting to database: " + e), 
     { useNewUrlParser: true }
 );
+
+if(config.util.getEnv('NODE_ENV') !== 'test') {
+    app.use(morgan('combined'));
+}
 
 // GET all treasures
 app.get("/treasures", (request, result) => {
@@ -42,4 +48,6 @@ app.get("/treasures/:id", (request, result) => {
 
 app.listen(3000, () => {
     console.log("Server started on port 3000");
-})
+});
+
+module.exports = app;
